@@ -249,12 +249,12 @@ and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341."
   "Return a list of lists with docsets contributed by users.
 The first element is the docset's name second the docset's archive url."
   (let ((user-docs (dash-docs-read-json-from-url
-                    "https://dashes-to-dashes.herokuapp.com/docsets/contrib")))
+                    "https://kapeli.com/feeds/zzz/user_contributed/build/index.json")))
     (mapcar (lambda (docset)
               (list
-               (assoc-default 'name docset)
-               (assoc-default 'archive docset)))
-            user-docs)))
+               (assoc-default 'name (cdr docset))
+               (assoc-default 'archive (cdr docset))))
+            (assoc-default 'docsets user-docs))))
 
 (defvar dash-docs-ignored-docsets
   '("Bootstrap" "Drupal" "Zend_Framework" "Ruby_Installed_Gems" "Man_Pages")
